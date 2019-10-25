@@ -7,9 +7,6 @@ OBJECT Table 50000 Tabel Pizza
     Modified=Yes;
     Version List=;
   }
-  PROPERTIES
-  {
-  }
   FIELDS
   {
     { 1   ;   ;Pizza Code          ;Code10        ;CaptionML=[DEU=Pizza Code;
@@ -30,7 +27,6 @@ OBJECT Table 50000 Tabel Pizza
                                                               ENU=Contact Number] }
     { 7   ;   ;Price               ;Decimal       ;CaptionML=[DEU=Preis;
                                                               ENU=Price] }
-    { 8   ;Yes;Active              ;Boolean        }
   }
   KEYS
   {
@@ -110,7 +106,6 @@ OBJECT Page 50001 Card Pizza
   {
     Date=13.08.19;
     Time=14:49:36;
-    Modified=Yes;
     Version List=;
   }
   PROPERTIES
@@ -128,8 +123,6 @@ OBJECT Page 50001 Card Pizza
   }
   CONTROLS
   {
-    { 1106900000;;Container;
-                ContainerType=ContentArea }
 
     { 1106900008;1;Group  ;
                 GroupType=Group }
@@ -169,4 +162,6 @@ OBJECT Page 50001 Card Pizza
     END.
   }
 }
+
+
 
