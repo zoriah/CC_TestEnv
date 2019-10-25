@@ -1,0 +1,172 @@
+OBJECT Table 50000 Tabel Pizza
+{
+  OBJECT-PROPERTIES
+  {
+    Date=13.08.19;
+    Time=18:01:56;
+    Modified=Yes;
+    Version List=;
+  }
+  PROPERTIES
+  {
+  }
+  FIELDS
+  {
+    { 1   ;   ;Pizza Code          ;Code10        ;CaptionML=[DEU=Pizza Code;
+                                                              ENU=Pizza Code] }
+    { 2   ;   ;Description         ;Text30        ;CaptionML=[DEU=Beschreibung;
+                                                              ENU=Description] }
+    { 3   ;   ;Diameter            ;Decimal       ;CaptionML=[DEU=Durchmesser;
+                                                              ENU=Diameter] }
+    { 4   ;   ;Rating              ;Option        ;CaptionML=[DEU=Bewertung;
+                                                              ENU=Rating];
+                                                   OptionCaptionML=[DEU=Gut,Mittelm„áig,Schlecht;
+                                                                    ENU=Good,Mediocre,Bad];
+                                                   OptionString=Good,Mediocre,Bad }
+    { 5   ;   ;Date                ;Date          ;CaptionML=[DEU=Datum;
+                                                              ENU=Date] }
+    { 6   ;   ;Contact Number      ;Code10        ;TableRelation=Contact.No.;
+                                                   CaptionML=[DEU=Kontakt Nummer;
+                                                              ENU=Contact Number] }
+    { 7   ;   ;Price               ;Decimal       ;CaptionML=[DEU=Preis;
+                                                              ENU=Price] }
+    { 8   ;Yes;Active              ;Boolean        }
+  }
+  KEYS
+  {
+    {    ;Pizza Code                              ;Clustered=Yes }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT Page 50000 Neu Pizza
+{
+  OBJECT-PROPERTIES
+  {
+    Date=13.08.19;
+    Time=16:40:02;
+    Modified=Yes;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    SourceTable=Table50000;
+    PageType=List;
+    CardPageID=Card Pizza;
+  }
+  CONTROLS
+  {
+    { 1106900000;0;Container;
+                ContainerType=ContentArea }
+
+    { 1106900001;1;Group  ;
+                Name=Group;
+                GroupType=Repeater }
+
+    { 1106900002;2;Field  ;
+                SourceExpr="Pizza Code" }
+
+    { 1106900003;2;Field  ;
+                SourceExpr=Description }
+
+    { 1106900004;2;Field  ;
+                SourceExpr=Diameter }
+
+    { 1106900009;2;Field  ;
+                SourceExpr=Price }
+
+    { 1106900005;2;Field  ;
+                SourceExpr=Rating }
+
+    { 1106900006;2;Field  ;
+                SourceExpr=Date }
+
+    { 1106900007;2;Field  ;
+                SourceExpr="Contact Number" }
+
+    { 1106900008;2;Field  ;
+                SourceExpr=Active }
+
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT Page 50001 Card Pizza
+{
+  OBJECT-PROPERTIES
+  {
+    Date=13.08.19;
+    Time=14:49:36;
+    Modified=Yes;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    SourceTable=Table50000;
+    OnAfterGetRecord=BEGIN
+                       IF Rating = Rating :: Bad THEN BEGIN
+                         MESSAGE(Attention);
+                       END;
+                       IF USERID =  'VM-NAV2015DEMO\COSMO' THEN BEGIN
+                         MESSAGE(Hallo,USERID);
+                       END
+                     END;
+
+  }
+  CONTROLS
+  {
+    { 1106900000;;Container;
+                ContainerType=ContentArea }
+
+    { 1106900008;1;Group  ;
+                GroupType=Group }
+
+    { 1106900007;2;Field  ;
+                SourceExpr="Pizza Code" }
+
+    { 1106900006;2;Field  ;
+                SourceExpr=Description }
+
+    { 1106900004;2;Field  ;
+                SourceExpr=Diameter }
+
+    { 1106900005;2;Field  ;
+                SourceExpr=Rating }
+
+    { 1106900003;2;Field  ;
+                SourceExpr=Price }
+
+    { 1106900002;2;Field  ;
+                SourceExpr=Date }
+
+    { 1106900001;2;Field  ;
+                SourceExpr="Contact Number" }
+
+    { 1106900009;2;Field  ;
+                SourceExpr=Active }
+
+  }
+  CODE
+  {
+    VAR
+      Attention@1106900000 : TextConst 'DEU=Achtung;ENU=Attention';
+      Hallo@1106900001 : TextConst 'DEU=Hallo %1;ENU=Hallo %1';
+
+    BEGIN
+    END.
+  }
+}
+
